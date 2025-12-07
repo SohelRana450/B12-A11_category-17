@@ -3,6 +3,9 @@ import MainLayouts from "./Layouts/MainLayouts";
 import Home from "./Pages/Home";
 import AllTickets from "./Pages/AllTickets";
 import Dashboard from "./Pages/Dashboard";
+import AuthLaouts from "./Layouts/AuthLaouts";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 
 const router = createBrowserRouter(
     [
@@ -24,6 +27,20 @@ const router = createBrowserRouter(
                 }
             ]
             
+        },
+        {
+            path: "/auth",
+            element: <AuthLaouts></AuthLaouts>,
+            children: [
+                {
+                    path: "/auth/login",
+                    element: <Login></Login>
+                },
+                {
+                    path: "/auth/register",
+                    element: <Register></Register>
+                }
+            ]
         }
     ]
 )
