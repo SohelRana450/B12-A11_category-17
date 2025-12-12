@@ -10,10 +10,10 @@ const MainLayouts = () => {
            <header>
             <Navbar></Navbar>
            </header>
-           <main className='h-100'>
+           <main>
             <Outlet></Outlet>
            </main>
-          <footer>
+          <footer >
              <Footer></Footer>
           </footer>
         </div>

@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Banner from '../components/Banner';
 
 const Home = () => {
     return (
-        <div>
-            this is home
+        <div className='h-screen pt-10'>
+            <Banner></Banner>
         </div>
     );
 };

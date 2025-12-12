@@ -58,7 +58,7 @@ const Navbar = () => {
     (
         <div className='dropdown dropdown-hover dropdown-end'>
             <div tabIndex={0} className='pr-1'>
-        <img className='w-12 rounded-full items-center justify-center mx-auto' src={user?.photoURL} alt={user.displayName} />
+        <img className='w-12 h-10 rounded-full items-center justify-center mx-auto' src={user?.photoURL} alt={user.displayName} />
         <h4 className='text-sm font-medium'>{user.displayName}</h4>
     </div>
     <ul tabIndex={-1} className="dropdown-content   bg-[#a09d97] text-[#062941] rounded-box z-50 w-40 p-2 space-y-2 shadow">

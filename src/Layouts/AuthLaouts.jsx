@@ -9,7 +9,7 @@ const AuthLaouts = () => {
            <header>
             <Navbar></Navbar>
            </header>
-           <main className='min-h-screen mb-20'>
+           <main className=' mb-20'>
             <Outlet></Outlet>
            </main>
           <footer>
