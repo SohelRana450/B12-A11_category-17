@@ -12,6 +12,9 @@ import AddTicket from "./Pages/Vendor/AddTicket";
 import MyAddedTicket from "./Pages/Vendor/MyAddedTicket";
 import RequestBooking from "./Pages/Vendor/RequestBooking";
 import Revenue from "./Pages/Vendor/Revenue";
+import UserProfile from "./Pages/Users.jsx/UserProfile";
+import BookedTickets from "./Pages/Users.jsx/BookedTickets";
+import TransactionHistory from "./Pages/Users.jsx/TransactionHistory";
 
 const router = createBrowserRouter(
     [
@@ -35,7 +38,18 @@ const router = createBrowserRouter(
                     path: "/dashboard",
                     element: <DashboardLayout></DashboardLayout>,
                     children: [
-                        
+                        {
+                            path: "/dashboard/user/profile",
+                            element: <UserProfile/>
+                        },
+                        {
+                            path: "/dashboard/user/booked-tickets",
+                            element: <BookedTickets/>
+                        },
+                        {
+                            path: "/dashboard/user/transactions",
+                            element: <TransactionHistory/>
+                        },
                         {
                             path: "/dashboard/vendor/profile",
                             element:<VendorProfile/>
