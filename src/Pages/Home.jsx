@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import LatestTicket from './LatestTicket';
+import ChooseUs from '../components/ChooseUs';
 import PopularRoutes from '../components/PopularRoutes';
 
 const Home = () => {
@@ -15,7 +16,9 @@ const Home = () => {
            <div>
             <PopularRoutes/>
            </div>
-           
+           <div className='my-30'>
+            <ChooseUs/>
+           </div>
         </div>
     );
 };
