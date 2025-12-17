@@ -1,0 +1,62 @@
+[
+  {
+    "transportType": "Bus",
+    "from": "Dhaka",
+    "to": "Jhenaidah",
+    "startingPrice": 1200,
+    "duration": "6-7 hours",
+    "image": "https://i.ibb.co.com/fVYcPTrL/download-2.jpg",
+    "totalTicketsAvailable": 120,
+    "tips": [
+      "Book bus tickets early to secure the best seats.",
+      "Choose verified bus operators for safety and comfort.",
+      "Arrive 15-30 minutes before departure to avoid delays.",
+      "Keep a small bag with water and snacks for the journey."
+    ]
+  },
+  {
+    "transportType": "Train",
+    "from": "Dhaka",
+    "to": "Sylhet",
+    "startingPrice": 900,
+    "duration": "7-8 hours",
+    "image": "https://i.ibb.co.com/Xk87syV1/download-3.jpg",
+    "totalTicketsAvailable": 60,
+    "tips": [
+      "Check the train class and amenities before booking.",
+      "Arrive at the station early to locate your platform.",
+      "Keep your ticket and ID ready at all times.",
+      "Bring a pillow or blanket for long journeys."
+    ]
+  },
+  {
+    "transportType": "Launch",
+    "from": "Dhaka",
+    "to": "Barisal",
+    "startingPrice": 1150,
+    "duration": "8-9 hours",
+    "image": "https://i.ibb.co.com/LXN6ZchX/download-1.jpg",
+    "totalTicketsAvailable": 70,
+    "tips": [
+      "Select cabin seats for overnight journeys for more comfort.",
+      "Check weather conditions before departure to avoid delays.",
+      "Keep important documents in a waterproof bag.",
+      "Arrive early to ensure smooth boarding."
+    ]
+  },
+  {
+    "transportType": "Plane",
+    "from": "Dhaka",
+    "to": "Cox's Bazar",
+    "startingPrice": 5000,
+    "duration": "1 hour",
+    "image": "https://i.ibb.co.com/39KgF4Fs/download-4.jpg",
+    "totalTicketsAvailable": 50,
+    "tips": [
+      "Book flights during off-peak hours for better prices.",
+      "Check baggage policies to avoid extra fees.",
+      "Arrive at the airport at least 2 hours before departure.",
+      "Track flight status online to stay updated on delays."
+    ]
+  }
+]

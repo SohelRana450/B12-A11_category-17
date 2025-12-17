@@ -1,0 +1,54 @@
+[
+  {
+    "title": "Bus Travel Tips",
+    "transportType": "Bus",
+    "icon": "FaBus",
+    "color": "bg-yellow-400",
+    "tips": [
+      "Book your bus tickets early to secure the best seats and avoid peak-hour rush.",
+      "Choose verified bus operators to ensure safety, comfort, and reliable schedules.",
+      "Keep a small travel bag with essentials like water, snacks, and hand sanitizer.",
+      "Arrive at the bus terminal 15–30 minutes early to avoid missing your departure.",
+      "Check the bus route and stops in advance to plan your journey efficiently."
+    ]
+  },
+  {
+    "title": "Train Travel Tips",
+    "transportType": "Train",
+    "icon": "FaTrain",
+    "color": "bg-blue-400",
+    "tips": [
+      "Check train class options and choose the one that suits your comfort and budget.",
+      "Arrive at the station early to locate platforms and avoid last-minute stress.",
+      "Keep your ticket and ID ready at all times for smooth boarding.",
+      "Bring a travel pillow or blanket for long journeys to stay comfortable.",
+      "Always verify train schedules for delays or changes before departure."
+    ]
+  },
+  {
+    "title": "Launch Travel Tips",
+    "transportType": "Launch",
+    "icon": "FaShip",
+    "color": "bg-teal-400",
+    "tips": [
+      "Select cabin seats for overnight or long-distance journeys for added comfort.",
+      "Check weather conditions before departure as launches may be delayed or canceled.",
+      "Keep important documents like tickets and ID safely stored in a waterproof bag.",
+      "Pack light and secure your belongings to avoid loss during travel.",
+      "Arrive at the launch terminal early to avoid last-minute boarding issues."
+    ]
+  },
+  {
+    "title": "Plane Travel Tips",
+    "transportType": "Plane",
+    "icon": "FaPlane",
+    "color": "bg-indigo-500",
+    "tips": [
+      "Book flights during off-peak hours to get better prices and avoid crowded airports.",
+      "Check airline baggage policies to prevent extra fees at check-in.",
+      "Arrive at the airport at least 2 hours before domestic flights and 3 hours before international flights.",
+      "Keep electronic devices charged and carry necessary travel adapters.",
+      "Track flight status online to stay updated on delays or gate changes."
+    ]
+  }
+]

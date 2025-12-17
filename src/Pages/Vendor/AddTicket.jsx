@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BiArrowBack } from 'react-icons/bi';
-import {  Link } from 'react-router';
+import { Link } from 'react-router';
 import { ImageHost } from '../../Image/ImageHost';
 import useAuth from '../../Hooks/useAuth';
 import { useMutation } from '@tanstack/react-query';
@@ -11,12 +11,22 @@ import { toast } from 'react-toastify';
 const AddTicket = () => {
     const {user} = useAuth()
 
-   const {isPending,isError,mutateAsync,reset: mutationReset} = useMutation({
+   const {
+    isPending,
+    isError,
+    mutateAsync,
+    reset: mutationReset
+    } = useMutation({
     mutationFn: async dataLoad => await axios.post(`${import.meta.env.VITE_API_URL}/add-ticket`,dataLoad),
     onSuccess: () => {
       toast.success('Ticket Added Successfully')
       mutationReset()
-    }
+    },
+    onError: ()=>{
+      toast.error('Ticket Not Added')
+      mutationReset()
+    },
+    retry: 3,
    })
 
 
@@ -24,8 +34,8 @@ const AddTicket = () => {
     const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset,
   } = useForm()
   const onSubmit = async(data) => {
     const {Ticket_title,From,To,Transport,Price,Ticket_quantity,Time,Perks,Image} = data;
@@ -33,6 +43,7 @@ const AddTicket = () => {
 
     try {
       const imageUrl = await ImageHost(imageFile)
+      const createdAt = new Date().toISOString();
       const ticketData = {
         image: imageUrl,
         Ticket_title,
@@ -47,11 +58,13 @@ const AddTicket = () => {
           image: user?.photoURL,
           name: user?.displayName,
           email: user?.email,
-        }
+        },
+        createdAt
+
       }
       await mutateAsync(ticketData);
-      reset();
-    } catch (error) {
+      reset()
+    }catch (error) {
       console.log(error);
     }
 
@@ -141,13 +154,13 @@ const AddTicket = () => {
           {errors.Time?.type === 'required' && <p>Add Departure date & time</p>}
             </div>
             <div className='space-y-2 w-full'>
-            <label className="label block"> Perks</label>
+            <label className="label block">Perks</label>
           <select  type="text"
           {...register("Perks")} 
           className="select w-full"
-          defaultValue={'Pick a Perks'} 
-          placeholder=" Perks" name="" id="">
-            <option disabled={true}>Pick a Perks</option>
+          defaultValue="Pick a Perks" 
+          placeholder="Perks" name="Perks" id="">
+            <option  disabled={true}>Pick a Perks</option>
             <option>AC</option>
             <option>Non AC</option>
             <option>Breakfast</option>

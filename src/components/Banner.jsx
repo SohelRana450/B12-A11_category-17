@@ -17,7 +17,7 @@ import img4 from '../assets/plane.jpg';
 
 const Banner = () => {
   return (
-   <div className="relative text-[#ffffff]  items-center justify-center mb-30">
+   <div className="relative text-[#ffffff]  items-center justify-center mb-10 md:mb-30 h-100">
 
   
   <div className="absolute inset-0">
