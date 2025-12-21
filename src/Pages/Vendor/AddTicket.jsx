@@ -36,7 +36,11 @@ const AddTicket = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm()
+  } = useForm({
+    defaultValues: {
+    DepartureDate: "2025-12-20" 
+  }
+  })
   const onSubmit = async(data) => {
     const {Ticket_title,From,To,Transport,Price,Ticket_quantity,Time,Perks,Image} = data;
     const imageFile = Image[0]
@@ -54,12 +58,13 @@ const AddTicket = () => {
         Price: Number(Price),
         Ticket_quantity: Number(Ticket_quantity),
         Time,
+        createdAt,
         Vendor_data: {
           image: user?.photoURL,
           name: user?.displayName,
           email: user?.email,
         },
-        createdAt
+        
 
       }
       await mutateAsync(ticketData);
@@ -147,10 +152,13 @@ const AddTicket = () => {
          <div className='flex justify-between items-center gap-20'>
             <div className='space-y-2 w-full'>
                  <label className="label block">Departure date & time</label>
-          <input type="text"
-          {...register("Time")} 
-          className="input w-full" 
-          placeholder="Departure date & time" />
+         <input
+  type="date"
+  {...register("Time", { required: true })}
+  className="input w-full"
+/>
+
+
           {errors.Time?.type === 'required' && <p>Add Departure date & time</p>}
             </div>
             <div className='space-y-2 w-full'>

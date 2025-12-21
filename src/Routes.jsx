@@ -15,6 +15,7 @@ import Revenue from "./Pages/Vendor/Revenue";
 import UserProfile from "./Pages/Users.jsx/UserProfile";
 import BookedTickets from "./Pages/Users.jsx/BookedTickets";
 import TransactionHistory from "./Pages/Users.jsx/TransactionHistory";
+import Details from "./components/Details";
 
 const router = createBrowserRouter(
     [
@@ -30,7 +31,10 @@ const router = createBrowserRouter(
                     path: "/all-tickets",
                     element: <AllTickets/>
                 },
-                
+                {
+                    path: "/all-tickets/:id",
+                    element: <Details/>
+                }
             ]
             
         },

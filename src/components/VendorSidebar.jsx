@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { BiListCheck, BiPlusCircle, BiWallet } from "react-icons/bi";
 import { FaClipboardList, FaUser } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
 import { NavLink, Outlet } from "react-router";
 
 const VendorSidebar =() =>{
@@ -39,6 +40,7 @@ const VendorSidebar =() =>{
           <NavLink to="/dashboard/vendor/my-tickets" className="flex gap-2 items-center"><BiListCheck size={18} />My Added Tickets   </NavLink>
           <NavLink to="/dashboard/vendor/requests" className="flex gap-2 items-center"><FaClipboardList size={18} />Requested Bookings   </NavLink>
           <NavLink to="/dashboard/vendor/revenue" className="flex gap-2 items-center"><BiWallet size={18} />Revenue Overview   </NavLink>
+          <NavLink to="/" className="flex gap-2 items-center "><IoMdHome size={18} />Home</NavLink>
         </nav>
       </div>
 
@@ -51,6 +53,7 @@ const VendorSidebar =() =>{
           <NavLink to="/dashboard/vendor/my-tickets" className="flex gap-2 items-center"><BiListCheck size={18} />My Added Tickets   </NavLink>
           <NavLink to="/dashboard/vendor/requests" className="flex gap-2 items-center"><FaClipboardList size={18} />Requested Bookings   </NavLink>
           <NavLink to="/dashboard/vendor/revenue" className="flex gap-2 items-center"><BiWallet size={18} />Revenue Overview   </NavLink>
+          <NavLink to="/" className="flex gap-2 items-center "><IoMdHome size={18} />Home</NavLink>
         </nav>
       </div>
 

@@ -3,6 +3,7 @@ import { BiCreditCard } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
 import { TiTicket } from "react-icons/ti";
 import { useState } from "react";
+import { IoMdHome } from "react-icons/io";
 
 const UserSidebar = () => {
 
@@ -31,11 +32,12 @@ const UserSidebar = () => {
           </button>
         </div>
 
-        <nav  onClick={() => setOpen(false)} className="space-y-3 menu menu-vertical dropdown-left">
+        <nav  onClick={() => setOpen(false)} className="space-y-2 menu menu-vertical dropdown-left">
          
           <NavLink to="/dashboard/User/profile" className="flex gap-2 items-center"><FaUser size={18} />User Profile   </NavLink>
           <NavLink to="/dashboard/user/booked-tickets" className="flex gap-2 items-center"><TiTicket size={18} />My Booked Tickets  </NavLink>
           <NavLink to="/dashboard/user/transactions" className="flex gap-2 items-center"><BiCreditCard size={18} />Transaction History   </NavLink>
+           <NavLink to="/" className="flex gap-2 items-center "><IoMdHome size={18} />Home</NavLink>
           
         </nav>
       </div>
@@ -47,6 +49,8 @@ const UserSidebar = () => {
            <NavLink to="/dashboard/User/profile" className="flex gap-2 items-center"><FaUser size={18} />User Profile   </NavLink>
           <NavLink to="/dashboard/user/booked-tickets" className="flex gap-2 items-center"><TiTicket size={18} />My Booked Tickets  </NavLink>
           <NavLink to="/dashboard/user/transactions" className="flex gap-2 items-center"><BiCreditCard size={18} />Transaction History   </NavLink>
+          <NavLink to="/" className="flex gap-2 items-center "><IoMdHome size={18} />Home</NavLink>
+         
           
         </nav>
       </div>

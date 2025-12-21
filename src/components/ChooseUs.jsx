@@ -10,7 +10,6 @@ const ChooseUs = () => {
     fetch("/chooseUs.json")
       .then((res) => res.json())
       .then((data) => setTravelTips(data))
-      .catch((err) => console.error("Failed to load tips:", err));
   }, []);
 
  
