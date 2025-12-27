@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 
 const SingleData = ({single}) => {
     return (
-        <div className='card my-10'>
+        <div className='card hover:shadow-2xl p-4'>
             
-                <img className='rounded-xl w-full h-65' src={single.image} alt="" />
-               <div className='mt-5'>
+                <img className='rounded-xl w-full h-65 transition transform duration-300  hover:scale-103 ' src={single.image} alt="" />
+               <div className='mt-3'>
                  <h3 className='font-bold text-xl'>{single.Ticket_title}</h3>
                
                 <p><span className='font-medium'>Ticket-quantity: </span>{single.Ticket_quantity}</p>

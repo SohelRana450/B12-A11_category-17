@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "project-11-bcbab",
+    "prod": "project-11-bcbab"
+  },
+  "targets": {},
+  "etags": {}
+}

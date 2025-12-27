@@ -3,7 +3,6 @@ import Logo from './Logo';
 import MyLink from './MyLink';
 import { Link } from 'react-router';
 import useAuth from '../Hooks/useAuth';
-import { FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
     const {user,logOut} = useAuth()

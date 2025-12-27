@@ -1,26 +1,26 @@
 import React from 'react';
-import useAuth from '../../Hooks/useAuth';
-import useRole from '../../Hooks/useRole';
-import Pending from '../../components/Pending';
+import useAuth from '../Hooks/useAuth';
+import useRole from '../Hooks/useRole';
+import Pending from './Pending';
 
-const VendorProfile = () => {
+const Profile = () => {
     const {user} = useAuth()
-   
+    
     const [role,isRoleLoading] = useRole();
+   
     if(isRoleLoading){
       return <Pending/>
     }
     return (
-          <div className='rounded-xl flex justify-center items-center py-8'>
-      <div className=' w-full px-4 lg:w-5/9'>
+         <div className=' rounded-xl flex justify-center items-center py-8'>
+      <div className=' w-full px-2 lg:w-5/9'>
         <img
           alt='cover photo'
           src={user?.photoURL}
           className='w-full mb-4 rounded-t-lg md:h-70 h-56'
         />
-        <div className='flex flex-col  items-center justify-center px-4 -mt-20'>
-         <div className='px-20 md:px-0'>
-           <a href='#' className='relative block'>
+        <div className='flex flex-col items-center justify-center p-4 -mt-20'>
+          <a href='#' className='relative block'>
             <img
               alt='profile'
               src={user?.photoURL}
@@ -28,16 +28,15 @@ const VendorProfile = () => {
             />
           </a>
 
-          <p className='py-1 px-6 my-2 font-medium text-white bg-pink-500 rounded-full'>
+          <p className='py-1 px-6 mt-2 font-medium text-white bg-blue-500 rounded-full'>
         {role}
           </p>
           
-         </div>
           <div className='w-full p-2 mt-4 rounded-lg'>
-            <div className='flex flex-col md:flex-row items-left justify-between space-y-3 px-20 md:px-0 '>
+            <div className='flex flex-col md:flex-row  justify-between space-y-3 px-20 md:px-0 '>
               <p className='flex flex-col'>
                 Name
-                <span className='font-bold  '>
+                <span className='font-bold'>
                   {user?.displayName}
                 </span>
               </p>
@@ -47,10 +46,10 @@ const VendorProfile = () => {
               </p>
 
               <div>
-                <button className='bg-pink-500  px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-pink-800 block mb-1'>
+                <button className='bg-blue-500  px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-800 block mb-1'>
                   Update Profile
                 </button>
-                <button className='bg-pink-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-pink-800'>
+                <button className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-800'>
                   Change Password
                 </button>
               </div>
@@ -62,5 +61,4 @@ const VendorProfile = () => {
     );
 };
 
-
-export default VendorProfile;
+export default Profile;

@@ -1,98 +1,96 @@
 
-
-import { useEffect, useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const TicketCard = ({ ticket }) => {
-  const {
-    ticketTitle,
-    image,
-    quantity,
-    totalPrice,
-    from,
-    to,
-    departureDateTime,
-    status,
-  } = ticket;
+  const {user} = useAuth()
+  const targetTime = new Date(ticket.departureDateTime).getTime();
+  const axiosSecure = useAxiosSecure()
 
-  // Convert the departure string to a timestamp
-  const targetTime =new Date((departureDateTime)).getTime();
-
-  // Helper function to calculate time remaining
   const getTimeLeft = useCallback(() => {
     const totalSeconds = Math.floor((targetTime - Date.now()) / 1000);
-
-    if (totalSeconds <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0, };
-    }
-
+    if (totalSeconds <= 0) return { expired: true, days:0,hours:0,minutes:0,seconds:0 };
     return {
-      days: Math.floor(totalSeconds / (60 * 60 * 24)),
-      hours: Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60)),
-      minutes: Math.floor((totalSeconds % (60 * 60)) / 60),
+      days: Math.floor(totalSeconds / (60*60*24)),
+      hours: Math.floor((totalSeconds % (60*60*24)) / (60*60)),
+      minutes: Math.floor((totalSeconds % (60*60)) / 60),
       seconds: Math.floor(totalSeconds % 60),
-      expired: false
+      expired: false,
     };
   }, [targetTime]);
 
-  const [timeLeft, setTimeLeft] = useState(()=>getTimeLeft());
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+  const isExpired = timeLeft.expired;
 
   useEffect(() => {
-    // Update timer every second
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft());
-    }, 1000);
-
+    if (ticket.status === "rejected" || ticket.status === "paid" || isExpired) return;
+    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
     return () => clearInterval(timer);
-  }, [getTimeLeft]);
+  }, [getTimeLeft, ticket.status, isExpired]);
+
+
+  const handlePayment = async () => {
+    const paymentInfo = {
+      ticketId: ticket.ticketId,
+      bookingId: ticket._id,
+      ticketTitle: ticket.ticketTitle,
+      unitPrice: ticket.unitPrice,
+      totalPrice:  ticket.unitPrice *  ticket.quantity,
+      quantity: ticket.quantity,
+      status: ticket.status,
+      departureDateTime: ticket.departureDateTime,
+      image: ticket.image,
+      vendor: ticket.Vendor_data,
+      customer: {
+        email: user?.email,
+        name: user?.displayName,
+        image: user?.photoURL,
+      }
+    };
+    const { data } = await axiosSecure.post(`/create-checkout-session`, paymentInfo);
+    window.location.href = data.url;
+  };
 
   return (
-    <div className="rounded-xl bg-white text-black shadow hover:shadow-md transition flex flex-col h-full">
-      <img className="rounded-t-xl w-full h-48 object-cover" src={image} alt={ticketTitle} />
+    <div className="bg-white shadow-md rounded-lg p-4 flex flex-col h-full">
+      <img src={ticket.image} alt={ticket.ticketTitle} className="h-48 object-cover rounded-md" />
+      <h3 className="text-lg font-bold mt-2">{ticket.ticketTitle}</h3>
+      <p><span className="font-medium">From: </span>{ticket.from} → <span className="font-medium">To: </span>{ticket.to}</p>
+      <p><span className="font-medium">Quantity:</span> {ticket.quantity}</p>
+      <p><span className="font-medium">Total:</span> ৳{ticket.totalPrice?.toLocaleString()}</p>
+      <p><span className="font-medium">Departure:</span> {(ticket.departureDateTime)}</p>
+      <p><span className="font-medium">Status:</span>
+        <span className={`ml-3 inline-flex items-center justify-center font-medium rounded-full px-2.5 py-0.5 ${
+                    ticket.status === 'accepted' ? 'bg-blue-100 text-blue-700' : 
+                   ticket.status === 'pending' ? 'bg-purple-100 text-purple-700' : ticket.status === 'paid' ? 'bg-red-100 text-pink-700' :'bg-gray-100 text-gray-700'
+                  }`}>
+                    {ticket.status}
+                  </span>
+      </p>
 
-      <div className="px-4 py-3 space-y-1 flex-grow">
-        <h3 className="text-lg font-semibold">{ticketTitle}</h3>
+      { ticket.status === "rejected" && (
+          <p className="font-bold text-gray-600 bg-cyan-300 text-center py-1 rounded-box  mx-8 mt-2">Rejected</p>
+      )}
+      { ticket.status === "paid" && (
+          <p className="font-bold text-green-600 bg-amber-300 text-center py-1 rounded-box  mx-6 mt-2">Payment Completed</p>
+      )}
 
-        <p className="text-sm"><b>Route:</b> {from} → {to}</p>
-        <p className="text-sm"><b>Departure:</b> {(departureDateTime)}</p>
-        <p className="text-sm"><b>Quantity:</b> {quantity}</p>
-        <p className="text-sm"><b>Total:</b> ৳{totalPrice}</p>
+      {!isExpired && ticket.status === "accepted" && (
+        <button className="btn mt-2 bg-blue-500 text-white" onClick={handlePayment}>
+          Pay Now (৳{ticket.totalPrice})
+        </button>
+      )}
 
-        <p className="text-sm">
-          <b>Status:</b>{" "}
-          <span className={`font-bold capitalize ${
-            status === "pending" ? "text-yellow-600" : 
-            status === "accepted" ? "text-blue-600" : 
-            status === "paid" ? "text-green-600" : "text-red-600"
-          }`}>
-            {status}
-          </span>
-        </p>
+      {!isExpired && ticket.status === "pending" && (
+        <p className="text-red-500 mt-2 font-bold animate-pulse">Waiting for vendor approval...</p>
+      )}
 
-        {/* Countdown Logic */}
-        {status !== "paid" && status !== "rejected" && !timeLeft.expired && (
-          <div className="text-xs font-bold text-red-600 bg-red-50 p-2 rounded mt-2">
-            ⏳ Payment ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-          </div>
-        )}
+      {isExpired && <p className="text-gray-500 font-bold bg-red-200 text-center py-1 rounded-box  mx-6 mt-2">Booking expired</p>}
 
-        {timeLeft.expired && status !== "paid" && (
-            <div className="text-xs font-bold text-gray-500 bg-gray-100 p-2 rounded mt-2">
-                🚫 Booking Expired
-            </div>
-        )}
-      </div>
-
-      <div className="p-4 pt-0">
-        {status !== "paid" && !timeLeft.expired && (
-          <button className="btn btn-sm w-full bg-indigo-700 hover:bg-indigo-800 text-white border-0">
-            Pay Now
-          </button>
-        )}
-
-        {status === "paid" && (
-          <div className="bg-green-100 text-green-700 py-2 rounded font-bold text-center text-sm">
-            ✓ Payment Completed
-          </div>
+      <div>
+        {!isExpired && ticket.status === "pending" && (
+          <p className="font-medium text-black rounded-box bg-blue-200  py-2 text-center mt-1">Time: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s</p>
         )}
       </div>
     </div>

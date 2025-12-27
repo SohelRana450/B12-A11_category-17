@@ -1,40 +1,58 @@
+ 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../Hooks/useAuth';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
+import { saveOrUpdateData } from '../Image/ImageHost';
 
 const Login = () => {
-
     const {register,handleSubmit, formState: {errors}} = useForm() 
     const {signInUser,setUser,googleLogin} = useAuth()
-     const location = useLocation()
     const navigate = useNavigate();
     const [show, setShow] = useState()
     
-        const onSubmit =(data)=>{
-            signInUser(data.email,data.password)
-            .then(result=>{
-                setUser(result)
-                navigate( location.state ? location.state : "/")
-            })
-            .catch(error=>{
-                console.log(error.message);
-            })
+        const onSubmit = async(data)=>{
+
+            try {
+                const result =await  signInUser(data.email,data.password)
+
+                const user = result.user
+            await saveOrUpdateData({
+            name: user?.displayName,
+            email: user?.email,
+             image: user?.photoURL,
+                        });
+                setUser(user)
+                navigate("/")
+                    toast.success('Successfully Log In!');
+
+            } catch (error) {
+                 toast.error(error.message);
+            }
         }
 
-         const handleSignIn = () =>{
-                console.log('data');
-                googleLogin()
-                .then(result =>{
-                    setUser(result.user)
-                    navigate(location.state?.pathname || "/")
+         const handleSignIn = async() =>{
+
+        try {
+
+        const result = await googleLogin()
+
+         const user = result.user
+
+        await saveOrUpdateData({
+            name: user?.displayName,
+            email: user?.email,
+             image: user?.photoURL,
+         });
+          navigate("/")
                     toast.success('Successfully Log In!');
-                })
-                .catch(error=> console.log(error.message)
-                )
+                    
+                } catch (error) {
+                    toast.error(error.message)
+                }
             }
 
     return (
@@ -44,11 +62,14 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="">
 
         <fieldset className="fieldset">
-          <label className="block my-2 font-medium">Email</label>
+          <div>
+            <label className="block my-2 font-medium">Email</label>
           <input type="email"
           className="input w-full" placeholder="Email"
-          {...register("email",{required: true})} />
-          {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
+          {...register("email",{required: true,pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/}})} />
+          {errors.email && <p className='text-red-500'>Email is required</p>}
+          </div>
           
          <div className='relative'>
              <label className="block mb-2 font-medium">Password</label>

@@ -5,14 +5,14 @@ import Footer from '../components/Footer';
 
 const AuthLaouts = () => {
     return (
-        <div className='w-11/12 mx-auto '>
+        <div className=''>
            <header>
             <Navbar></Navbar>
            </header>
-           <main className=' mb-20'>
+           <main className='w-11/12 mx-auto  mb-20'>
             <Outlet></Outlet>
            </main>
-          <footer>
+          <footer className='w-11/12 mx-auto '>
              <Footer></Footer>
           </footer>
         </div>

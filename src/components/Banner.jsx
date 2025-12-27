@@ -5,7 +5,7 @@ import { Typewriter } from 'react-simple-typewriter';
 import { Autoplay,Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// ⭐ MUST HAVE — Swiper CSS
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,7 +17,8 @@ import img4 from '../assets/plane.jpg';
 
 const Banner = () => {
   return (
-   <div className="relative text-[#ffffff]  items-center justify-center mb-10 md:mb-30 h-100">
+  <div className=''>
+     <div className="relative text-[#ffffff]  items-center justify-center md:mb-30  h-100">
 
   
   <div className="absolute inset-0">
@@ -27,7 +28,7 @@ const Banner = () => {
       loop
       pagination={true}
       slidesPerView={1}
-      className="h-90  md:h-130 rounded-xl "
+      className="h-100  md:h-130 rounded-xl  "
     >
       <SwiperSlide>
         <img src={img1} className="w-full h-full" />
@@ -74,6 +75,7 @@ const Banner = () => {
   </div>
 </div>
 
+  </div>
   );
 };
 

@@ -5,19 +5,20 @@ import { Link } from 'react-router';
 import { ImageHost } from '../../Image/ImageHost';
 import useAuth from '../../Hooks/useAuth';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import Pending from '../../components/Pending';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AddTicket = () => {
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
 
    const {
     isPending,
-    isError,
     mutateAsync,
     reset: mutationReset
     } = useMutation({
-    mutationFn: async dataLoad => await axios.post(`${import.meta.env.VITE_API_URL}/add-ticket`,dataLoad),
+    mutationFn: async dataLoad => await axiosSecure.post(`/add-ticket`,dataLoad),
     onSuccess: () => {
       toast.success('Ticket Added Successfully')
       mutationReset()
@@ -26,7 +27,7 @@ const AddTicket = () => {
       toast.error('Ticket Not Added')
       mutationReset()
     },
-    retry: 3,
+    
    })
 
 
@@ -36,11 +37,7 @@ const AddTicket = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-    DepartureDate: "2025-12-20" 
-  }
-  })
+  } = useForm()
   const onSubmit = async(data) => {
     const {Ticket_title,From,To,Transport,Price,Ticket_quantity,Time,Perks,Image} = data;
     const imageFile = Image[0]
@@ -64,13 +61,12 @@ const AddTicket = () => {
           name: user?.displayName,
           email: user?.email,
         },
-        
-
+        status: "pending",
       }
       await mutateAsync(ticketData);
       reset()
     }catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
 
 
@@ -78,15 +74,11 @@ const AddTicket = () => {
 
 
   if(isPending){
-    return <p>Loading...</p>
-  }
-
-  if(isError){
-    return <p>{isError.message}</p>
+    return <Pending/>
   }
     return (
         <div>
-            <div className="card bg-base-100 w-full h-full mx-auto shadow-2xl">
+            <div className="card bg-base-300 w-full h-full mx-auto shadow-2xl">
       <div className="card-body ">
        <form onSubmit={handleSubmit(onSubmit)} action="">
          <div className="space-y-2 justify-center items-center ">

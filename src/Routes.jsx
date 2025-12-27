@@ -16,11 +16,23 @@ import UserProfile from "./Pages/Users.jsx/UserProfile";
 import BookedTickets from "./Pages/Users.jsx/BookedTickets";
 import TransactionHistory from "./Pages/Users.jsx/TransactionHistory";
 import Details from "./components/Details";
+import PaymentSuccess from "./Pages/PaymentSuccess";
+import AdminProfile from "./Pages/Admin/AdminProfile";
+import ManageTickets from "./Pages/Admin/ManageTickets";
+import ManageUsers from "./Pages/Admin/ManageUsers";
+import AdvertiseTickets from "./Pages/Admin/AdvertiseTickets";
+import Profile from "./components/Profile";
+import PrivateRoute from "./Provider/PrivateRoute";
+import UpdateAddedTicket from "./components/UpdateAddedTicket";
+import VendorRoute from "./Provider/VendorRoute";
+import AdminRoute from "./Provider/AdminRoute";
+import Error from "./components/Error";
 
 const router = createBrowserRouter(
     [
         {
             path: "/",
+            errorElement: <Error/>,
             element: <MainLayouts></MainLayouts>,
             children: [
                 {
@@ -29,52 +41,85 @@ const router = createBrowserRouter(
                 },
                 {
                     path: "/all-tickets",
-                    element: <AllTickets/>
+                    element:<PrivateRoute> <AllTickets/></PrivateRoute>
                 },
                 {
                     path: "/all-tickets/:id",
-                    element: <Details/>
+                    element: <PrivateRoute><Details/></PrivateRoute>
+                },
+                {
+                    path: "/payment-success",
+                    element: <PrivateRoute><PaymentSuccess/></PrivateRoute>
                 }
             ]
             
         },
         {
                     path: "/dashboard",
-                    element: <DashboardLayout></DashboardLayout>,
+                    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
                     children: [
                         {
+                            path:"/dashboard",
+                            element: <PrivateRoute><Profile/></PrivateRoute>
+                        },
+                        {
                             path: "/dashboard/user/profile",
-                            element: <UserProfile/>
+                            element: <PrivateRoute><UserProfile/></PrivateRoute>
                         },
                         {
                             path: "/dashboard/user/booked-tickets",
-                            element: <BookedTickets/>
+                            element: <PrivateRoute><BookedTickets/></PrivateRoute>
                         },
                         {
                             path: "/dashboard/user/transactions",
-                            element: <TransactionHistory/>
+                            element: <PrivateRoute><TransactionHistory/></PrivateRoute>
                         },
                         {
                             path: "/dashboard/vendor/profile",
-                            element:<VendorProfile/>
+                            element: 
+                            <PrivateRoute>
+                            <VendorRoute>
+                            <VendorProfile/></VendorRoute></PrivateRoute>
                         },
                         {
                             path: "/dashboard/vendor/add-ticket",
-                            element: <AddTicket/>
+                            element: <PrivateRoute><VendorRoute><AddTicket/></VendorRoute></PrivateRoute>
                         },
                         {
                             path: "/dashboard/vendor/my-tickets",
-                            element: <MyAddedTicket/>
+                            element: <PrivateRoute><VendorRoute><MyAddedTicket/></VendorRoute></PrivateRoute>
+                        },
+                        {
+                            path: "/dashboard/vendor/update/ticket/:id",
+                            element: <PrivateRoute><VendorRoute><UpdateAddedTicket/></VendorRoute></PrivateRoute>
                         },
                         {
                             path: "/dashboard/vendor/requests",
-                            element: <RequestBooking/>
+                            element: <PrivateRoute><VendorRoute><RequestBooking></RequestBooking></VendorRoute></PrivateRoute>
                         }
                         ,
                         {
                             path: "/dashboard/vendor/revenue",
-                            element: <Revenue/>
+                            element: <PrivateRoute><VendorRoute><Revenue/></VendorRoute></PrivateRoute>
                         },
+                        {
+                            path: "/dashboard/admin/profile",
+                            element: <PrivateRoute><AdminRoute><AdminProfile/></AdminRoute></PrivateRoute>
+                        },
+                        {
+                            path: "/dashboard/admin/manage-tickets",
+                            element: <PrivateRoute><AdminRoute><ManageTickets/></AdminRoute></PrivateRoute>
+                        }
+                        ,
+                        {
+                            path: "/dashboard/admin/manage-users",
+                            element: <PrivateRoute><AdminRoute><ManageUsers/></AdminRoute></PrivateRoute>
+                        }
+                        ,
+                        {
+                            path: "/dashboard/admin/advertise-tickets",
+                            element: <PrivateRoute><AdminRoute><AdvertiseTickets/></AdminRoute></PrivateRoute>
+                        }
                        
                     ]
                 },

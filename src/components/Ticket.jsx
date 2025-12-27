@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Ticket = ({ticket}) => {
     return (
-        <div className='card my-10'>
+        <div className='card'>
             
-                <img className='rounded-xl w-full h-50' src={ticket.image} alt="" />
+                <img className='rounded-xl w-full h-65 transition transform duration-300  hover:scale-103' src={ticket.image} alt="" />
                <div className='mt-5'>
                  <h3 className='font-bold text-xl'>{ticket.Ticket_title}</h3>
                
@@ -14,7 +15,7 @@ const Ticket = ({ticket}) => {
                  <p><span className='font-medium'>Price:</span> {ticket.Price}</p>
                 </div>
                 <p><span className='font-medium'>Perks: </span>{ticket.Perks}</p>
-                <button className='py-2 px-10 btn btn-active bg-blue-500 border-0 mt-2'>See Details</button>
+                <Link to={`/all-tickets/${ticket._id}`} className='py-2 px-10 btn btn-active bg-blue-500 border-0 mt-2'>See Details</Link>
                </div>
           
         </div>

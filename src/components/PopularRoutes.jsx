@@ -11,7 +11,7 @@ const PopularRoutes = () => {
   }, []);
 
   return (
-    <section className="py-12 px-4 md:px-6 text-black">
+    <section className="py-12 px-4 mt-10 md:mt-0 md:px-6 text-black">
       <h2 className="text-3xl md:text-5xl font-bold text-center text-purple-500 mb-10 leading-tight">
                  Popular Routes {" "}
                   <span className="text-yellow-400">
@@ -35,15 +35,15 @@ const PopularRoutes = () => {
             <img
               src={route.image}
               alt={`${route.from}-${route.to}`}
-              className="rounded-md mb-3 w-full h-42 "
+              className="rounded-t-md mb-3 w-full h-42 "
             />
-            <div className="px-3 pb-2">
+            <div className="px-4 pb-3 text-sm">
               <h3 className="text-xl text-gray-900 font-semibold ">
               {route.from} → {route.to}
             </h3>
             <p>Price: ৳ {route.startingPrice}</p>
             <p>Duration: {route.duration}</p>
-            <ul className="list-decimal list-inside">
+            <ul className="list-disc list-inside">
               {route.tips.map((tip, i) => (
                 <li key={i}>{tip}</li>
               ))}
