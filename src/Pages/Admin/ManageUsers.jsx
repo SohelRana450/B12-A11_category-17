@@ -123,10 +123,10 @@ const axiosSecure = useAxiosSecure()
                     Make Customer
                   </button>
                   <div className="flex gap-2 mt-1">
-                    {u.role === "vendor" && (
+                    {u.role === "vendor" &&  (
                     <button
                       onClick={() => markFraud(u.email)}
-                      className="block rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700"
+                      className="block rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 "
                     >
                       Fraud
                     </button>

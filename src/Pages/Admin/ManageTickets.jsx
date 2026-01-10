@@ -7,7 +7,7 @@ const ManageTickets = () => {
   const { data: tickets = [], refetch } = useQuery({
     queryKey: ["allTickets"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/tickets-list`);
+      const res = await axiosSecure.get(`/tickets_listed`);
       return res.data;
     },
   });

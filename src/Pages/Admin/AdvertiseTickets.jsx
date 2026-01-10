@@ -15,6 +15,8 @@ const AdvertiseTickets = () => {
     },
   });
 
+    const advertisedCount = tickets.filter(ticket => ticket.advertised).length;
+    
   const handleToggle = async (ticket) => {
     try {
       await axiosSecure.patch(
@@ -66,6 +68,7 @@ const AdvertiseTickets = () => {
 
               <td>
                 <input
+               disabled={!ticket.advertised && advertisedCount >= 6}
                   type="checkbox"
                   checked={ticket.advertised}
                   onChange={() => handleToggle(ticket)}

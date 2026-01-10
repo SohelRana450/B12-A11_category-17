@@ -73,7 +73,7 @@ const RequestBooking = () => {
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">
             <thead>
-              <tr>
+              <tr className="whitespace-nowrap px-4 py-3 font-normal text-center">
                 <th>User</th>
                 <th>Email</th>
                 <th>Ticket</th>
@@ -85,37 +85,23 @@ const RequestBooking = () => {
             <tbody>
               {requests.map((booking) => (
                 <tr key={booking._id} className="transition-colors">
-                  <td>
+                  <td className="whitespace-nowrap px-4 py-3">
                     <div className="font-semibold">{booking.customer?.name || "N/A"}</div>
                   </td>
-                  <td className="text-sm">
+                  <td className="text-sm whitespace-nowrap px-4 py-3">
                     {booking.customer?.email}
                   </td>
-                  <td className="font-medium">
+                  <td className="whitespace-nowrap px-4 py-3 font-medium">
                     {booking.ticketTitle}
                   </td>
-                  <td className="font-semibold">{booking.quantity}</td>
-                  <td className="font-bold text-primary">
+                  <td className="whitespace-nowrap px-4 py-3 font-semibold">{booking.quantity}</td>
+                  <td className="whitespace-nowrap px-4 py-3 font-bold text-primary">
                     ৳{(booking.totalPrice || booking.quantity * booking.unitPrice)?.toLocaleString()}
                   </td>
                
                   
                    <td className="whitespace-nowrap px-4 py-3 space-x-2 text-center transition-colors">
-                    {/* <button
-                    onClick={() => handleAction(booking._id,"accepted")}
-                    disabled={booking.status === 'accepted'}
-                    className="inline-block rounded bg-purple-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-700 disabled:bg-gray-300"
-                  >
-                   ✅ Accept
-                  </button>
-                 
-                  <button
-                    onClick={() => handleReject(booking._id,"rejected")}
-                    disabled={booking.status === 'rejected'}
-                    className="inline-block rounded bg-purple-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-700 disabled:bg-gray-100"
-                  >
-                   ❌ Reject
-                  </button> */}
+                    
 
                    <button
                     onClick={() => handleAction(booking._id,"accepted")}

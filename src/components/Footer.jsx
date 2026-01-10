@@ -6,8 +6,8 @@ import imageIcon from '../assets/icon.png'
 
 const Footer = () => {
     return (
-        <div>
-                <footer className=" footer sm:footer-horizontal justify-center lg:justify-between  p-10 font-medium">
+        <div className=''>
+                <div className=" footer sm:footer-horizontal justify-center lg:justify-between  p-10 font-medium">
           <aside className=''>      
     <div className='flex text-black bg-red-100 rounded-xl pr-2'>
               <img className='w-18 h-14 ' src={imageIcon} alt="" />
@@ -36,7 +36,7 @@ const Footer = () => {
             <p>Phone: 01990347105</p>
             <p>Facebook Page: Md Shohel Rana</p>
           </nav>
-        </footer>
+        </div>
         
            <div className=''>
              <p className='font-medium text-center py-8 mb-0'>Copyright © 2025 - Ticket.com All right reserved</p>
